@@ -27,7 +27,7 @@ class MealDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final MealModel meal = ModalRoute.of(context)!.settings.arguments as MealModel;
     return Scaffold(
-      appBar: AppBar(title: FittedBox(child: Text(meal.title))),
+      appBar: AppBar(title: FittedBox(child: Text(meal.title)), backgroundColor: UMYellow),
       body: SingleChildScrollView(
         child: Column(
           children: [
