@@ -10,9 +10,10 @@ ThemeData basicTheme() {
     canvasColor: Colors.white,
     fontFamily: 'Raleway',
     textTheme: ThemeData.light().textTheme.copyWith(
-      bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
-      bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+      bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1), fontSize: 22),
+      bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1), fontSize: 18),
       caption: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed', fontWeight: FontWeight.bold),
+      headline1: TextStyle(fontSize: 24, fontFamily: 'Raleway', fontWeight: FontWeight.bold),
     ),
   );
 }
