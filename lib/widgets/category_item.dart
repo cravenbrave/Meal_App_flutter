@@ -24,12 +24,12 @@ class CategoryItem extends StatelessWidget {
         child: Stack(children: [
           Image.network(imageUrl, fit: BoxFit.cover,),
           Container(
-            width: MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.width * 0.32,
             color: Colors.black54,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Text(
               title,
-              style: TextStyle(fontSize: 16, color: Colors.white),
+              style: TextStyle(fontSize: 20, color: Colors.white),
               textAlign: TextAlign.start,
               softWrap: true,
               overflow: TextOverflow.fade,
