@@ -24,11 +24,11 @@ class _TabsScreenState extends State<TabsScreen> {
             labelColor: UMBlue,
             indicator: BoxDecoration(color: UMYellow),
             tabs: [
-              Tab(
+              const Tab(
                 icon: Icon(Icons.category),
                 text: 'Categories',
               ),
-              Tab(
+              const Tab(
                 icon: Icon(Icons.star),
                 text: 'Favorites',
               ),
