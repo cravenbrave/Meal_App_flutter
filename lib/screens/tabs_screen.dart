@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/favorites_screen.dart';
 import 'package:meal_app/utilities/theme_constants.dart';
+import 'package:meal_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
             title: Text('Deli Meal', style: TextStyle(color: UMBlue)),
             backgroundColor: UMYellow,
           ),
+          drawer: MainDrawer(),
           bottomNavigationBar: TabBar(
             labelColor: UMBlue,
             indicator: BoxDecoration(color: UMYellow),
