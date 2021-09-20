@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meal_app/models/meal_model.dart';
 import 'package:meal_app/screens/meal_detail_screen.dart';
-class MealItem extends StatelessWidget {
+class MealItem extends StatefulWidget {
   final MealModel meal;
-  const MealItem({Key? key, required this.meal}) : super(key: key);
+
+  MealItem({Key? key, required this.meal}) : super(key: key);
+
+  @override
+  _MealItemState createState() => _MealItemState();
+}
+
+class _MealItemState extends State<MealItem> {
+  bool _isDeleted = false;
 
   String get complexityText {
-    switch (meal.complexity) {
+    switch (widget.meal.complexity) {
       case Complexity.Simple:
         return 'Simple';
       case Complexity.Challenging:
@@ -20,7 +28,7 @@ class MealItem extends StatelessWidget {
   }
 
   String get affordabilityText {
-    switch (meal.affordability) {
+    switch (widget.meal.affordability) {
       case Affordability.Affordable:
         return 'Affordable';
       case Affordability.Pricey:
@@ -31,12 +39,23 @@ class MealItem extends StatelessWidget {
         return 'Unknown';
     }
   }
+
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: meal);
+    //it returns a future function, so we can use "then" after
+    //like doing some thing with the data passed back
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: widget.meal)
+        .then((result){
+      if (result != null) {
+        setState((){
+          _isDeleted = true;
+        });
+      }
+    });
   }
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+   if (!_isDeleted) return InkWell(
       onTap: () => _selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -50,7 +69,7 @@ class MealItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-                  child: Image.network(meal.imageUrl, fit: BoxFit.cover, height: 200, width: double.infinity),
+                  child: Image.network(widget.meal.imageUrl, fit: BoxFit.cover, height: 200, width: double.infinity),
                 ),
                 //used to position the widget
                 Positioned(
@@ -61,7 +80,7 @@ class MealItem extends StatelessWidget {
                       color: Colors.black54,
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: Text(
-                        meal.title,
+                        widget.meal.title,
                         style: TextStyle(fontSize: 26, color: Colors.white),
                         textAlign: TextAlign.right,
                         softWrap: true,
@@ -79,7 +98,7 @@ class MealItem extends StatelessWidget {
                     children: [
                       Icon(Icons.schedule),
                       SizedBox(width: 6),
-                      Text('${meal.duration} mins'),
+                      Text('${widget.meal.duration} mins'),
                     ],
                   ),
                   Row(
@@ -103,5 +122,6 @@ class MealItem extends StatelessWidget {
         ),
       ),
     );
+   return Container();
   }
 }

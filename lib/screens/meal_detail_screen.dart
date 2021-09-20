@@ -28,6 +28,13 @@ class MealDetailScreen extends StatelessWidget {
     final MealModel meal = ModalRoute.of(context)!.settings.arguments as MealModel;
     return Scaffold(
       appBar: AppBar(title: FittedBox(child: Text(meal.title)), backgroundColor: UMYellow),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          //pop: also back to the previous screen, make sure you have one
+          Navigator.of(context).pop(meal);
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
