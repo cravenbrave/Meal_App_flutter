@@ -62,7 +62,7 @@ const DUMMY_CATEGORIES = const [
     id: 'c10',
     title: 'Summer',
     color: Colors.teal,
-    imageUrl: 'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+    imageUrl: 'https://lowcarb-ology.com/wp-content/uploads/2017/06/sex-on-the-beach-feat-1.jpg',
   ),
 ];
 

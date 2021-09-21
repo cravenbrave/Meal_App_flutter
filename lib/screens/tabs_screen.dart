@@ -18,7 +18,7 @@ class _TabsScreenState extends State<TabsScreen> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Deli Meal', style: TextStyle(color: UMBlue)),
+            title: Text('Deli Meal', style: basicTheme().textTheme.headline3),
             backgroundColor: UMYellow,
           ),
           drawer: MainDrawer(),
