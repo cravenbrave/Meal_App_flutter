@@ -1,10 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal_model.dart';
 import 'package:meal_app/utilities/theme_constants.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/MealDetailScreen';
-  const MealDetailScreen({Key? key}) : super(key: key);
+  Function(String) toggleFavorite;
+  Function(String) isFavorite;
+  MealDetailScreen({Key? key, required this.toggleFavorite, required this.isFavorite}) : super(key: key);
 
   Widget textTitle(BuildContext context, String text) {
     return Container(
@@ -28,12 +32,30 @@ class MealDetailScreen extends StatelessWidget {
     final MealModel meal = ModalRoute.of(context)!.settings.arguments as MealModel;
     return Scaffold(
       appBar: AppBar(title: FittedBox(child: Text(meal.title, style: basicTheme().textTheme.headline4)), backgroundColor: UMYellow),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          //pop: also back to the previous screen, make sure you have one
-          Navigator.of(context).pop(meal);
-        },
+      floatingActionButton: Row(
+        children: [
+          SizedBox(width: 30),
+          TextButton(
+            onPressed: () => toggleFavorite(meal.id),
+            child: isFavorite(meal.id)
+                ? CircleAvatar(
+                    backgroundColor: UMYellow,
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                      size: 26,
+                    ))
+                : CircleAvatar(backgroundColor: UMYellow, child: Icon(Icons.favorite_border, size: 30, color: UMBlue)),
+          ),
+          Spacer(),
+          TextButton(
+            onPressed: () {
+              //pop: also back to the previous screen, make sure you have one
+              Navigator.of(context).pop(meal);
+            },
+            child: CircleAvatar(backgroundColor: UMYellow, child: Icon(Icons.delete, size: 30, color: UMBlue)),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

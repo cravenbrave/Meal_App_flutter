@@ -22,6 +22,25 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false,
   };
   List<MealModel> _currentMeals = DUMMY_MEALS;
+  List<MealModel> _favoriteMeals = [];
+
+  void toggleFavorite(String mealId) {
+    final existIndex = _favoriteMeals.indexWhere((element) => mealId == element.id);
+
+    if (existIndex == -1) {
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((element) => mealId == element.id));
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.removeAt(existIndex);
+      });
+    }
+  }
+
+  bool isFavorite(String mealId) {
+    return _favoriteMeals.any((element) => mealId == element.id);
+  }
 
   void setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -49,10 +68,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'DeliMeals',
       theme: basicTheme(),
-      home: TabsScreen(),
+      home: TabsScreen(favoriteMeals: _favoriteMeals),
       routes: {
-        CategoryMealScreen.routeName: (context) => CategoryMealScreen(currentMeals: _currentMeals,),
-        MealDetailScreen.routeName: (context) => MealDetailScreen(),
+        CategoryMealScreen.routeName: (context) => CategoryMealScreen(currentMeals: _currentMeals),
+        MealDetailScreen.routeName: (context) => MealDetailScreen(toggleFavorite: toggleFavorite, isFavorite: isFavorite),
         FiltersScreen.routeName: (context) => FiltersScreen(setFilters: setFilters, currentFilters: _filters),
       },
     );
